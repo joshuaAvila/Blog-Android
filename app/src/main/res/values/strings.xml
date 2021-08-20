@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Proyecto-app</string>
+
+    <string name="nombre_blog">Blog App</string>
+    <string name="nombre_auth">Auth</string>
+    <string name="hint_email">Correo</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_apellido">Apellido</string>
+    <string name="hint_foto">Foto</string>
+    <string name="iniciarSesion">Iniciar Sesión</string>
+    <string name="registrarse">Registrarse</string>
+
+    <string name="txt_paraIniciarSesion"> Ya Tienes cuenta?</string>
+    <string name="txt_paraRegistrarse"> Aún no tienes cuenta?</string>
+    <string name="txt_share">Share</string>
+</resources>

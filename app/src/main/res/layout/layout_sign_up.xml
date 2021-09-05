@@ -11,19 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/nombre_blog"
-        android:textSize="32sp"
-        android:fontFamily="@font/stixtwomath_regular"
+        android:textSize="60sp"
+        android:fontFamily="@font/dash"
         android:textColor="@color/colorGrey"
         android:gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="80dp"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
         android:id="@+id/txt_LayoutEmailRegistro"
+        android:layout_marginTop="30dp"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -34,6 +35,7 @@
             android:textSize="15sp"
             android:inputType="textEmailAddress"
             android:background="@color/colorWhite"
+
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -42,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txt_LayoutPasswordRegistro"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
         app:passwordToggleEnabled="true"
         >
 
@@ -69,7 +71,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_password"
+            android:hint="@string/hint_confirm"
             android:id="@+id/txt_Confirmpassword"
             android:textSize="15sp"
             android:inputType="textPassword"
@@ -85,14 +87,14 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:id="@+id/btn_registro"
         android:text="@string/registrarse"
         android:background="@drawable/btn_round"
         android:textColor="@color/colorWhite"
         android:textSize="18dp"
         android:layout_marginBottom="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:textAllCaps="false"
         />
 

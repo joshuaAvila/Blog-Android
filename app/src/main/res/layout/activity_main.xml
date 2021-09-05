@@ -10,10 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:fontFamily="@font/stixtwomath_regular"
+        android:fontFamily="@font/dash"
         android:gravity="center_horizontal"
         android:text="@string/nombre_blog"
-        android:textSize="32sp" />
+        android:textColor="@color/colorBlack"
+        android:textSize="80sp" />
 
 
 

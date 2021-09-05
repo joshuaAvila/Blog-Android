@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Proyecto-app</string>
+    <string name="app_name"></string>
 
     <string name="nombre_blog">Blog App</string>
     <string name="nombre_auth">Auth</string>
     <string name="hint_email">Correo</string>
     <string name="hint_password">Password</string>
+    <string name="hint_confirm">Confirmar Password</string>
     <string name="hint_apellido">Apellido</string>
     <string name="hint_foto">Foto</string>
     <string name="iniciarSesion">Iniciar Sesión</string>

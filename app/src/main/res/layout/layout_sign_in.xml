@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/nombre_blog"
-        android:textSize="32dp"
-        android:fontFamily="@font/stixtwomath_regular"
+        android:textSize="60sp"
+        android:fontFamily="@font/dash"
         android:textColor="@color/colorGrey"
         android:gravity="center_horizontal"
         android:layout_marginTop="70dp"
@@ -22,8 +22,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="8dp"
         android:id="@+id/txt_LayoutemailInicio"
+        android:layout_marginTop="30dp"
         >
 
     <com.google.android.material.textfield.TextInputEditText
@@ -66,7 +67,7 @@
         android:textColor="@color/colorWhite"
         android:textSize="18dp"
         android:layout_marginBottom="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:textAllCaps="false"
         />
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:orientation="vertical"
+    tools:context=".UserInfoActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:text="User Info"
+
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@color/colorLightGrey"
+        android:id="@+id/imgUserInfo"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Foto"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:id="@+id/txtSeleccionarFoto"
+        android:textSize="17sp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:id="@+id/txt_layoutNombreUserinfo"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:id="@+id/txt_nombreUserinfo"
+            android:textSize="15sp"
+            android:inputType="text"
+            android:background="@color/colorWhite"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+
+        android:id="@+id/txt_layoutApellidoUserinfo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Apellido"
+            android:id="@+id/txt_apellidoUserinfo"
+            android:textSize="15sp"
+            android:inputType="text"
+            android:background="@color/colorWhite"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_continuar"
+        android:text="Continuar"
+        android:background="@drawable/btn_round"
+        android:textColor="@color/colorWhite"
+        android:textSize="18dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        />
+
+
+
+
+
+
+
+</LinearLayout>

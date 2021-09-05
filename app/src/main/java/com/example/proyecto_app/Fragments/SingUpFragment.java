@@ -1,5 +1,8 @@
 package com.example.proyecto_app.Fragments;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,14 +11,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.proyecto_app.AuthActivity;
+import com.example.proyecto_app.Constantes;
+import com.example.proyecto_app.HomeActivity;
 import com.example.proyecto_app.R;
+import com.example.proyecto_app.UserInfoActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SingUpFragment  extends Fragment {
@@ -24,6 +43,7 @@ public class SingUpFragment  extends Fragment {
     private TextInputEditText txtEmail, txtPassword, txtConfirm;
     private TextView txtIniciarSesion;
     private Button  btnRegistro;
+    private ProgressDialog dialog;
 
     public SingUpFragment(){}
 
@@ -44,6 +64,8 @@ public class SingUpFragment  extends Fragment {
         txtIniciarSesion = view.findViewById(R.id.txt_iniciarSesion);
         txtEmail = view.findViewById(R.id.txt_emailRegistro);
         btnRegistro = view.findViewById(R.id.btn_registro);
+        dialog = new ProgressDialog(getContext());
+        dialog.setCancelable(false);
 
         txtIniciarSesion.setOnClickListener(v->{
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layoutContainer,new SignInFragment()).commit();
@@ -51,7 +73,7 @@ public class SingUpFragment  extends Fragment {
 
         btnRegistro.setOnClickListener(v->{
             if(validate()){
-
+                register();
             }
         });
 
@@ -133,4 +155,57 @@ public class SingUpFragment  extends Fragment {
 
         return true;
     }
+
+    private void register(){
+        dialog.setMessage("Registering");
+        dialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, Constantes.register, response -> {
+            try {
+                JSONObject object= new JSONObject(response);
+                if(object.getBoolean("success")){
+                    JSONObject user = object.getJSONObject("user");
+                    //make shared preference user
+                    SharedPreferences userPreference = getActivity().getApplicationContext().getSharedPreferences("user",getContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = userPreference.edit();
+                    editor.putString("token", object.getString("token"));
+                    editor.putString("name", user.getString("name"));
+                    editor.putString("apellido", user.getString("apellido"));
+                    editor.putString("foto", user.getString("foto"));
+                    editor.putBoolean("isLoggedIn",true);
+                    editor.apply();
+
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            dialog.dismiss();
+
+            Toast.makeText(getContext(), "Registrado Exitosamente", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(((AuthActivity)getContext()), UserInfoActivity.class));
+            ((AuthActivity) getContext()).finish();
+
+
+
+        }, error -> {
+            error.printStackTrace();
+            dialog.dismiss();
+        }){
+            //agregar parametros
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> map = new HashMap<>();
+                map.put("email",txtEmail.getText().toString().trim());
+                map.put("password",txtPassword.getText().toString());
+                return map;
+            }
+        };
+
+        //agregar this request to request queue
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(request);
+    }
 }
+

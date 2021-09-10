@@ -27,7 +27,6 @@ public class OnBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_on_board);
         init();
     }
-
     private void init(){
         view_Pager = findViewById(R.id.view_pager);
         btn_left = findViewById(R.id.btnLeft);
@@ -46,15 +45,10 @@ public class OnBoardActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
         btn_left.setOnClickListener(v->{
 
             view_Pager.setCurrentItem(view_Pager.getCurrentItem()+2);
         });
-
-
-
     }
 
     private void addDots(int position){
@@ -73,17 +67,14 @@ public class OnBoardActivity extends AppCompatActivity {
             dots[position].setTextColor(getResources().getColor(R.color.colorGrey));
         }
     }
-
     private  ViewPager.OnPageChangeListener listener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         }
-
         @Override
         public void onPageSelected(int position) {
             addDots(position);
-
             if(position == 0){
                 btn_left.setVisibility(View.VISIBLE);
                 btn_left.setEnabled(true);
@@ -99,7 +90,6 @@ public class OnBoardActivity extends AppCompatActivity {
             }
 
         }
-
         @Override
         public void onPageScrollStateChanged(int state) {
 

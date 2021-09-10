@@ -168,6 +168,7 @@ public class SingUpFragment  extends Fragment {
                     SharedPreferences userPreference = getActivity().getApplicationContext().getSharedPreferences("user",getContext().MODE_PRIVATE);
                     SharedPreferences.Editor editor = userPreference.edit();
                     editor.putString("token", object.getString("token"));
+                    editor.putInt("id", user.getInt("id"));
                     editor.putString("name", user.getString("name"));
                     editor.putString("apellido", user.getString("apellido"));
                     editor.putString("foto", user.getString("foto"));

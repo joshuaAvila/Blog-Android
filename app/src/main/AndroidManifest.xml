@@ -7,13 +7,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/iconoblogapp"
         android:label="@string/nombre_blog"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyectoapp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".EditarUserInfoActivity"></activity>
+        <activity android:name=".CommentActivity" />
+        <activity android:name=".EditarPostActivity" />
+        <activity android:name=".AddPostActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".UserInfoActivity" />
         <activity android:name=".AuthActivity" />
         <activity android:name=".OnBoardActivity" />

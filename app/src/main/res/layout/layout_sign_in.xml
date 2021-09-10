@@ -7,17 +7,27 @@
     android:paddingLeft="50dp"
     android:paddingRight="50dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/nombre_blog"
-        android:textSize="60sp"
-        android:fontFamily="@font/dash"
-        android:textColor="@color/colorGrey"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="80dp"
-    />
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="100dp"
+        android:src="@drawable/blogapp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        />
+
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/nombre_blog"-->
+<!--        android:textSize="60sp"-->
+<!--        android:fontFamily="@font/dash"-->
+<!--        android:textColor="@color/colorBlack"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--    />-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="50dp"
     android:orientation="vertical"
-    tools:context=".UserInfoActivity">
+    tools:context=".EditarUserInfoActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,8 +14,7 @@
         android:textSize="30sp"
         android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
-        android:text="Información de Usuario"
-        android:textColor="@color/colorPrimary"
+        android:text="Editar Información"
 
         />
     <de.hdodenhof.circleimageview.CircleImageView
@@ -23,7 +22,7 @@
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
         android:src="@color/colorLightGrey"
-        android:id="@+id/imgUserInfo"
+        android:id="@+id/img_editarUserInfo"
         android:layout_marginBottom="10dp"
         />
 
@@ -33,7 +32,7 @@
         android:text="Select Foto"
         android:textColor="@color/colorPrimary"
         android:gravity="center_horizontal"
-        android:id="@+id/txtSeleccionarFoto"
+        android:id="@+id/txt_editarSeleccionarFoto"
         android:textSize="17sp"
         android:layout_marginBottom="20dp"
         />
@@ -42,18 +41,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:id="@+id/txt_layoutNombreUserinfo"
+        android:id="@+id/txt_editarlayoutNombreUserinfo"
         >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_nombre"
-            android:id="@+id/txt_nombreUserinfo"
+            android:hint="Nombre"
+            android:id="@+id/txt_editarNombreUserinfo"
             android:textSize="15sp"
             android:inputType="text"
             android:background="@color/colorWhite"
-
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -63,13 +61,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
 
-        android:id="@+id/txt_layoutApellidoUserinfo">
+        android:id="@+id/txt_EditarlayoutApellidoUserinfo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_apellido"
-            android:id="@+id/txt_apellidoUserinfo"
+            android:id="@+id/txt_EditarapellidoUserinfo"
             android:textSize="15sp"
             android:inputType="text"
             android:background="@color/colorWhite"
@@ -80,8 +78,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_continuar"
-        android:text="@string/btn_continuar"
+        android:id="@+id/btn_editarGuardar"
+        android:text="@string/btn_guardar"
         android:background="@drawable/btn_round"
         android:textColor="@color/colorWhite"
         android:textSize="18dp"
@@ -89,4 +87,7 @@
         android:layout_marginTop="10dp"
         android:textAllCaps="false"
         />
+
+
+
 </LinearLayout>

@@ -1,6 +1,5 @@
 package com.example.proyecto_app;
 
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +21,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.proyecto_app.Fragments.SignInFragment;
-import com.example.proyecto_app.Fragments.SingUpFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +35,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserInfoActivity extends AppCompatActivity {
+public class EditarUserInfoActivity extends AppCompatActivity {
 
     private TextInputLayout layoutNombre, layoutApellido;
     private TextInputEditText txt_nombre, txt_apellido;
@@ -50,23 +47,31 @@ public class UserInfoActivity extends AppCompatActivity {
     private SharedPreferences userPref ;
     private ProgressDialog dialog;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
-        init();
+        setContentView(R.layout.activity_editar_user_info);
+
+        initt();
     }
-    private void init(){
+
+    private void initt() {
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
         userPref =  getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        layoutNombre = findViewById(R.id.txt_layoutNombreUserinfo);
-        layoutApellido = findViewById(R.id.txt_layoutApellidoUserinfo);
-        txt_nombre = findViewById(R.id.txt_nombreUserinfo);
-        txt_apellido = findViewById(R.id.txt_apellidoUserinfo);
-        txt_seleccionarFoto = findViewById(R.id.txtSeleccionarFoto);
-        btn_continuar = findViewById(R.id.btn_continuar);
-        img_userinfo = findViewById(R.id.imgUserInfo);
+        layoutNombre = findViewById(R.id.txt_editarlayoutNombreUserinfo);
+        layoutApellido = findViewById(R.id.txt_EditarlayoutApellidoUserinfo);
+        txt_nombre = findViewById(R.id.txt_editarNombreUserinfo);
+        txt_apellido = findViewById(R.id.txt_EditarapellidoUserinfo);
+        txt_seleccionarFoto = findViewById(R.id.txt_editarSeleccionarFoto);
+        btn_continuar = findViewById(R.id.btn_editarGuardar);
+        img_userinfo = findViewById(R.id.img_editarUserInfo);
+
+        Picasso.get().load(getIntent().getStringExtra("imgUrl")).into(img_userinfo);
+        txt_nombre.setText(userPref.getString("name",""));
+        txt_apellido.setText(userPref.getString("apellido",""));
+
 
         txt_seleccionarFoto.setOnClickListener(v->{
             Intent i = new Intent(Intent.ACTION_PICK);
@@ -74,13 +79,66 @@ public class UserInfoActivity extends AppCompatActivity {
             startActivityForResult(i,GALLERY_ADD_PROFILE);
 
         });
+
         btn_continuar.setOnClickListener(v->{
             if(validate()){
-                saveUserInfo();
+                actualizarPerfil();
             }
         });
-
     }
+
+    private void actualizarPerfil() {
+        dialog.setMessage("Actualizando..");
+        dialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, Constantes.save_userInfo,response -> {
+            try {
+                JSONObject object = new JSONObject(response);
+                if(object.getBoolean("success")){
+                    SharedPreferences.Editor editor = userPref.edit();
+                    editor.putString("name",txt_nombre.getText().toString().trim());
+                    editor.putString("apellido",txt_apellido.getText().toString().trim());
+                    editor.apply();
+                    finish();
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(this, "Perfil Actualizado", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+
+
+
+        },error -> {
+            error.printStackTrace();
+            dialog.dismiss();
+        }){
+
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String token = userPref.getString("token","");
+                HashMap<String,String> map = new HashMap<>();
+                map.put("Authorization","Bearer "+token);
+                return map;
+            }
+
+            //add parametros
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> map = new HashMap<>();
+                map.put("name",txt_nombre.getText().toString().trim());
+                map.put("apellido",txt_apellido.getText().toString().trim());
+                map.put("foto",bitmapToString(bitmap));
+                return map;
+            }
+
+        };
+        RequestQueue queue = Volley.newRequestQueue(EditarUserInfoActivity.this);
+        queue.add(request);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -95,6 +153,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         }
     }
+
     private boolean validate(){
         if(txt_nombre.getText().toString().isEmpty()){
             layoutNombre.setErrorEnabled(true);
@@ -110,63 +169,15 @@ public class UserInfoActivity extends AppCompatActivity {
         return  true;
     }
 
-    private void saveUserInfo(){
-        dialog.setMessage("Guardando..");
-        dialog.show();
-        String name = txt_nombre.getText().toString().trim();
-        String apellido = txt_apellido.getText().toString().trim();
-
-        StringRequest request = new StringRequest(Request.Method.POST,Constantes.save_userInfo,response->{
-            try {
-
-                JSONObject object = new JSONObject(response);
-                if(object.getBoolean("success")){
-                    SharedPreferences.Editor editor = userPref.edit();
-                    editor.putString("foto",object.getString("foto"));
-                    editor.apply();
-
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            dialog.dismiss();
-            startActivity( new Intent( UserInfoActivity.this, AuthActivity.class));
-            finish();
-
-        },error -> {
-            error.printStackTrace();
-            dialog.dismiss();
-        }){
-            //add token to headers
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                String token = userPref.getString("token","");
-                HashMap<String,String> map = new HashMap<>();
-                map.put("Authorization","Bearer "+token);
-                return map;
-            }
-            //add parametros
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-               HashMap<String,String> map = new HashMap<>();
-               map.put("name",name);
-               map.put("apellido",apellido);
-               map.put("foto",bitmapToString(bitmap));
-               return map;
-            }
-        };
-        RequestQueue queue = Volley.newRequestQueue(UserInfoActivity.this);
-        queue.add(request);
-    }
     private String bitmapToString(Bitmap bitmap){
+
         if(bitmap != null){
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
             byte[] array = byteArrayOutputStream.toByteArray();
             return Base64.encodeToString(array,Base64.DEFAULT);
+
         }
         return "";
     }
 }
-

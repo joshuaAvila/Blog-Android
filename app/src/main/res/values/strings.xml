@@ -7,6 +7,8 @@
     <string name="hint_password">Password</string>
     <string name="hint_confirm">Confirmar Password</string>
     <string name="hint_apellido">Apellido</string>
+    <string name="hint_nombre">Nombre</string>
+
     <string name="hint_foto">Foto</string>
     <string name="iniciarSesion">Iniciar Sesión</string>
     <string name="registrarse">Registrarse</string>
@@ -14,4 +16,6 @@
     <string name="txt_paraIniciarSesion"> Ya Tienes cuenta?</string>
     <string name="txt_paraRegistrarse"> Aún no tienes cuenta?</string>
     <string name="txt_share">Share</string>
+    <string name="btn_guardar">GUARDAR</string>
+    <string name="btn_continuar">CONTINUAR</string>
 </resources>

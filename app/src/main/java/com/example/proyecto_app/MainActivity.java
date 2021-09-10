@@ -33,15 +33,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         },1000);
-
-
-
     }
         private void isFirstTime(){
-
             SharedPreferences preferences = getApplication().getSharedPreferences("onBoard", Context.MODE_PRIVATE);
             boolean isFirstTime = preferences.getBoolean("isFirstTime", true);
-
             if(isFirstTime){
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("isFirstTime",false);

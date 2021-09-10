@@ -4,8 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 
@@ -39,8 +44,8 @@ import java.util.Map;
 
 public class HomeFragments extends Fragment {
     private View view;
-    private RecyclerView recyclerView;
-    private ArrayList<Post> arrayList;
+    public static RecyclerView recyclerView;
+    public static ArrayList<Post> arrayList;
     private SwipeRefreshLayout refreshLayout;
     private PostAdapter postAdapter;
     private MaterialToolbar toolbar;
@@ -65,6 +70,7 @@ public class HomeFragments extends Fragment {
         refreshLayout = view.findViewById(R.id.swipe_home);
         toolbar =  view.findViewById(R.id.toolBar_menu);
         ((HomeActivity)getContext()).setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
 
         getPost();
 
@@ -137,5 +143,28 @@ public class HomeFragments extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(request);
 
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull  MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search,menu);
+        MenuItem item = menu.findItem(R.id.buscar);
+        SearchView searchView = (SearchView)item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                postAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 }

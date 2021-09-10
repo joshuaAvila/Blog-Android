@@ -68,6 +68,7 @@
             android:textSize="14sp"
             android:text="Hello World"
             android:textStyle="bold"
+            android:layout_margin="4dp"
             android:textColor="@color/colorGrey"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
@@ -94,7 +95,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_outline"
                 android:id="@+id/btn_postLike"
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/transparent"/>
 
             <ImageButton
@@ -102,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_comentario"
                 android:id="@+id/btn_postComentario"
+                android:layout_marginTop="4dp"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"/>
 
@@ -117,7 +120,7 @@
             android:text="12 Likes"
            android:textStyle="bold"
             android:textSize="13sp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/colorGrey"
             />
         <TextView
@@ -127,7 +130,7 @@
             android:text="Ver mas comentarios"
             android:textSize="12sp"
             android:layout_marginTop="4dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginBottom="20dp"
             android:textColor="@color/colorLightGrey"
             />
